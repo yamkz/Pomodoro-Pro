@@ -172,36 +172,24 @@ export default function Home() {
 
   return (
     <main className="min-h-screen flex items-center justify-center px-6 py-12">
-      <section className="w-full max-w-3xl flex flex-col gap-6 text-black">
-        <header className="flex flex-col items-center gap-4 text-center">
+      <section className="w-full max-w-3xl flex flex-col gap-8">
+        <header className="flex flex-col items-center gap-2 text-center">
           <h1 className="text-3xl font-semibold tracking-tight">
             Pomodoro Pro
           </h1>
-          <p className="text-base text-black">
+          <p className="text-base text-default-600">
             集中と休憩のリズムをシンプルに管理できるポモドーロタイマーです。
           </p>
         </header>
 
-        <div className="flex flex-col items-center gap-4">
+        <div className="flex flex-col items-center gap-6">
           <Tabs
             aria-label="タイマー種別"
             selectedKey={currentStage}
             onSelectionChange={handleManualStageChange}
-            disableAnimation
-            classNames={{
-              tabList:
-                "flex items-center gap-2 rounded-full border-2 border-gray-300 bg-white p-2",
-              tab: "rounded-full text-sm font-medium text-black px-6 py-2 data-[selected=true]:bg-black data-[selected=true]:text-white",
-              base: "flex flex-col items-center",
-            }}
-            disableCursorAnimation
           >
             {STAGE_ORDER.map((stage) => (
-              <Tab
-                key={stage}
-                title={STAGES[stage].label}
-                className="text-black"
-              />
+              <Tab key={stage} title={STAGES[stage].label} />
             ))}
           </Tabs>
 
@@ -211,19 +199,11 @@ export default function Home() {
 
           <Progress
             value={progressValue}
-            className="w-full max-w-xl"
-            color="default"
-            classNames={{
-              base: "gap-2",
-              track: "h-3 rounded-full bg-gray-300 border-2 border-gray-300",
-              indicator: "bg-black",
-            }}
+            className="w-full max-w-lg"
             aria-label="進行状況"
           />
 
-          <Chip
-            className="bg-gray-300 text-black border-2 border-gray-300 rounded-full px-4 py-2"
-          >
+          <Chip color="primary" variant="flat">
             次は{nextStageLabel}
           </Chip>
         </div>
@@ -239,42 +219,27 @@ export default function Home() {
               min={1}
               max={90}
               labelPlacement="outside"
-              classNames={{
-                label: "text-sm font-medium text-black",
-                inputWrapper:
-                  "bg-gray-300 border-2 border-gray-300 rounded-md px-4",
-                input: "text-lg text-black placeholder:text-black",
-              }}
             />
           ))}
         </div>
 
-        <div className="flex flex-wrap items-center justify-center gap-4">
-          <Button
-            onPress={handleStartPause}
-            className="bg-black text-white rounded-full px-8 py-3 font-semibold"
-          >
+        <div className="flex flex-wrap items-center justify-center gap-3">
+          <Button onPress={handleStartPause} color="primary">
             {isRunning ? "一時停止" : "スタート"}
           </Button>
-          <Button
-            onPress={handleSkip}
-            className="bg-white text-black border-2 border-gray-300 rounded-full px-6 py-3 font-semibold"
-          >
+          <Button onPress={handleSkip} variant="bordered" color="primary">
             スキップ
           </Button>
-          <Button
-            onPress={handleReset}
-            className="bg-white text-black border-2 border-gray-300 rounded-full px-6 py-3 font-semibold"
-          >
+          <Button onPress={handleReset} variant="bordered" color="primary">
             リセット
           </Button>
         </div>
 
-        <footer className="flex flex-col items-center gap-3 text-center">
-          <Chip className="bg-gray-300 text-black border-2 border-gray-300 rounded-full px-4 py-2">
+        <footer className="flex flex-col items-center gap-2 text-center text-sm">
+          <Chip color="primary" variant="flat">
             長休憩まであと {remainingBeforeLongBreak} 回の集中
           </Chip>
-          <p className="text-sm text-gray-300">
+          <p className="text-default-500">
             時間を変更すると現在のモードの残り時間も更新されます。細かな調整でご自身のリズムに合わせてください。
           </p>
         </footer>
